@@ -297,6 +297,30 @@
     cursor: pointer;
   }
 
+  /* ABOUT SUMMARY (HOME) */
+  .about-summary { background: var(--white); padding: 90px 5%; }
+  .about-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
+  .about-image-wrapper { position: relative; }
+  .about-image-wrapper img { width: 100%; border-radius: 16px; position: relative; z-index: 2; box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
+  .about-image-wrapper::before { content: ''; position: absolute; width: 100%; height: 100%; background: var(--gold); border-radius: 16px; top: 15px; right: 15px; z-index: 1; opacity: 0.5; }
+  .about-summary-content h2 { font-family: 'Cairo', sans-serif; font-size: 32px; font-weight: 800; color: var(--navy); margin-bottom: 20px; }
+  .about-summary-content h2 span { color: var(--gold); }
+  .about-summary-content p { font-size: 16px; line-height: 1.8; color: var(--gray-600); margin-bottom: 24px; }
+  .checklist { list-style: none; margin-bottom: 32px; }
+  .checklist li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-dark); margin-bottom: 12px; font-weight: 600; }
+  .checklist li::before { content: '✔'; color: var(--gold); }
+
+  /* PORTFOLIO (HOME) */
+  .portfolio { background: var(--white); padding: 90px 5%; }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .portfolio-item { position: relative; border-radius: 16px; overflow: hidden; height: 280px; cursor: pointer; }
+  .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .portfolio-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,27,43,0.95), transparent 70%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; opacity: 0; transition: opacity 0.3s ease; }
+  .portfolio-item:hover img { transform: scale(1.1); }
+  .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+  .portfolio-item-overlay h4 { color: var(--white); font-family: 'Cairo', sans-serif; font-size: 18px; margin-bottom: 4px; }
+  .portfolio-item-overlay p { color: var(--gold); font-size: 14px; }
+
   /* FEATURES */
   .features { background: var(--navy); }
   .features .section-title { color: var(--white); }
@@ -536,12 +560,19 @@
   .service-full-card:nth-child(even) .service-sidebar { order: 2; }
   .service-full-card:nth-child(even) .service-body { order: 1; }
   .service-sidebar {
-    background: var(--navy);
+    background-color: var(--navy);
+    background-size: cover; background-position: center;
     padding: 40px 28px; display: flex;
     flex-direction: column; align-items: center;
     justify-content: center; text-align: center;
     position: relative; overflow: hidden;
   }
+  .service-sidebar::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(11,27,43,0.85); z-index: 1; transition: all var(--transition);
+  }
+  .service-full-card:hover .service-sidebar::before { background: rgba(11,27,43,0.7); }
+  .service-sidebar > * { position: relative; z-index: 2; }
   .service-sidebar::after {
     content: ''; position: absolute;
     width: 200px; height: 200px;
@@ -713,6 +744,8 @@
   /* RESPONSIVE */
   @media(max-width:900px) {
     .hero-content { grid-template-columns: 1fr; }
+    .about-summary-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
     .hero-visual { display: none; }
     .services-grid-home { grid-template-columns: 1fr 1fr; }
     .features-grid { grid-template-columns: 1fr 1fr; }
@@ -733,6 +766,7 @@
   }
   @media(max-width:560px) {
     .services-grid-home { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
     .hero-stats { grid-template-columns: 1fr 1fr 1fr; }
     .values-grid { grid-template-columns: 1fr 1fr; }
     .team-grid { grid-template-columns: 1fr 1fr; }
@@ -821,6 +855,26 @@
     </div>
   </section>
 
+  <section class="about-summary">
+    <div class="about-summary-grid">
+      <div class="about-summary-content">
+        <div class="section-tag">نبذة عنا</div>
+        <h2>شريكك الموثوق في <span>الصيانة والتشغيل</span></h2>
+        <p>مؤسسة إبداع للصيانة والتشغيل هي خيارك الأمثل لخدمات الصيانة الشاملة للمباني السكنية والتجارية. بخبرة تفوق 15 عاماً، نقدم حلولاً احترافية تضمن لك راحة البال واستدامة أصولك.</p>
+        <ul class="checklist">
+          <li>فريق طوارئ متاح 24/7 للتدخل السريع</li>
+          <li>نخبة من الفنيين والمهندسين المعتمدين</li>
+          <li>ضمان شامل على كافة أعمال الصيانة</li>
+          <li>أسعار تنافسية وشفافية تامة في التكاليف</li>
+        </ul>
+        <button class="btn-primary" onclick="showPage('about')">اكتشف المزيد عنا</button>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1541888081622-4451c88c78c3?auto=format&fit=crop&w=800&q=80" alt="فريق الصيانة">
+      </div>
+    </div>
+  </section>
+
   <section class="home-services">
     <div class="section-header">
       <div class="section-tag">خدماتنا الرئيسية</div>
@@ -893,6 +947,58 @@
         <div class="feature-num">100%</div>
         <h4>ضمان الأعمال</h4>
         <p>نضمن جميع أعمالنا ونلتزم بإصلاح أي خلل بدون تكلفة إضافية</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio">
+    <div class="section-header">
+      <div class="section-tag">معرض الأعمال</div>
+      <h2 class="section-title">نماذج من أعمالنا ومشاريعنا</h2>
+      <p class="section-sub">نفخر بما نقدمه من جودة استثنائية في كل مشروع، شاهد بعض إنجازات فريقنا في مختلف المجالات.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="أعمال كهرباء">
+        <div class="portfolio-item-overlay">
+          <h4>لوحات تحكم كهربائية</h4>
+          <p>أعمال الكهرباء</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="صيانة تكييف">
+        <div class="portfolio-item-overlay">
+          <h4>تركيب تكييف مركزي</h4>
+          <p>تكييف وتبريد</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80" alt="أعمال سباكة">
+        <div class="portfolio-item-overlay">
+          <h4>تمديد شبكات تغذية</h4>
+          <p>أعمال السباكة</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="إدارة مرافق">
+        <div class="portfolio-item-overlay">
+          <h4>صيانة مجمع تجاري</h4>
+          <p>إدارة المرافق</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="اتحاد الملاك">
+        <div class="portfolio-item-overlay">
+          <h4>صيانة مرافق مشتركة</h4>
+          <p>خدمات اتحاد الملاك</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="صيانة عامة">
+        <div class="portfolio-item-overlay">
+          <h4>تشطيب وترميم داخلي</h4>
+          <p>الصيانة العامة</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1109,7 +1215,7 @@
     <div class="services-container">
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">⚡</div>
           <h3>أعمال الكهرباء</h3>
           <span class="service-badge">متوفر 24/7</span>
@@ -1129,7 +1235,7 @@
       </div>
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">🚿</div>
           <h3>أعمال السباكة</h3>
           <span class="service-badge">استجابة فورية</span>
@@ -1149,7 +1255,7 @@
       </div>
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">❄️</div>
           <h3>تكييف وتبريد</h3>
           <span class="service-badge">جميع الأنواع</span>
@@ -1169,7 +1275,7 @@
       </div>
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">🏢</div>
           <h3>إدارة المرافق</h3>
           <span class="service-badge">عقود سنوية</span>
@@ -1189,7 +1295,7 @@
       </div>
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">🏘️</div>
           <h3>خدمات اتحاد الملاك</h3>
           <span class="service-badge">مناطق مشتركة</span>
@@ -1209,7 +1315,7 @@
       </div>
 
       <div class="service-full-card">
-        <div class="service-sidebar">
+        <div class="service-sidebar" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80');">
           <div class="service-big-icon">🔨</div>
           <h3>الصيانة العامة</h3>
           <span class="service-badge">كل الأعمال</span>
